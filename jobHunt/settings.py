@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt',
     'user',
     'job'
 ]
@@ -75,6 +77,13 @@ WSGI_APPLICATION = 'jobHunt.wsgi.application'
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "core.jwt_auth.JWTAuthentication",
+    ),
+    "EXCEPTION_HANDLER": "custom_handlers.exception_handler.core_exception_handler",
+    "NON_FIELD_ERRORS_KEY": "error",
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
     )
 }
 
